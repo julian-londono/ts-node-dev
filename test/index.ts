@@ -1,8 +1,16 @@
-import * as test from 'tape'
+import test from 'tape'
+// import * as test from 'tape'
 import { spawnTsNodeDev, scriptsDir, tmpDir, turnOnOutput } from './spawn'
-import * as fs from 'fs-extra'
+import fs from 'fs-extra'
+// import * as fs from 'fs-extra'
 import { join } from 'path'
-import touch = require('touch')
+// import touch = require('touch')
+
+
+import * as path from 'path';
+import * as url from "url"
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 if (process.argv.slice(2)[0] === '--output') {
   turnOnOutput()
@@ -50,6 +58,7 @@ test('It should restart on file change', async (t) => {
 test('It allow watch arbitrary folder/file', async (t) => {
   const ps = spawnTsNodeDev('--respawn --watch folder,folder2 simple.ts')
   await ps.waitForLine(/Using/)
+  const touch  = await import("touch")
   setTimeout(() => touch(join(scriptsDir, 'folder/some-file')), 250)
   await ps.waitForLine(/Restarting.*some-file/)
   t.pass('works')

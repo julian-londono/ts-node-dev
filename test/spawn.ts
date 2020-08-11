@@ -1,5 +1,10 @@
-import child = require('child_process')
-import path = require('path')
+import * as child from 'child_process';
+// import child = require('child_process')
+import * as path from 'path';
+// import path = require('path')
+import * as url from "url"
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const bin = path.join(__dirname, '/../bin/ts-node-dev')
 
 export const tmpDir = path.join(__dirname, '../.tmp')
